@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	 <script src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	<style type="text/css">
+
+	    	*{
+	    		margin:0;
+	    		padding: 0;
+	    	}
+			#screen {
+				background-color: #fff;
+				width: 100%;
+				height: 380px;
+				border: 1px solid rgb(229, 229, 229);
+				font-size: 14px;
+			}
+			
+			.content {
+				border: 1px solid rgb(204, 204, 204);
+				border-radius: 3px;
+				width: 320px;
+				height: 35px;
+				font-size: 14px;
+				margin-top: 30px;
+				
+			}
+			
+			.send {
+				border: 1px solid rgb(230, 80, 30);
+				color: rgb(230, 80, 0);
+				border-radius: 3px;
+				text-align: center;
+				padding: 0;
+				height: 35px;
+				line-height: 35px;
+				font-size: 14px;
+				width: 159px;
+				background-color: white;
+			}
+			
+			.clear {
+				border: 1px solid;
+				color: darkgray;
+				border-radius: 3px;
+				text-align: center;
+				padding: 0;
+				height: 35px;
+				line-height: 35px;
+				font-size: 14px;
+				width: 159px;
+				background-color: white;
+			}
+			
+			.edit {
+				margin: 20px;
+				text-align: center;
+			}
+			
+			.text {
+				position: absolute;
+			}
+			
+			.con {
+				background-color: floralwhite;
+				padding: 40px 80px 80px;
+			}
+			.dm_show{
+				margin: 30px;
+			}
+	</style>
+</head>
+<body>
+	<div class="con">
+			<div>
+				<div id="screen">
+					<div class="dm_show">
+						<!-- <div>text message</div>  -->
+					</div>
+				</div>
+				<div class="edit">
+					<p>
+						<input placeholder="说点什么吧？" class="content" type="text" />
+					</p>
+					<p>
+						<input type="button" class="send" value="发送" />
+						<input type="button" id="txt" class="clear" value="清屏" />
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+						$(function() {
+				$('.send').click(function() {
+					var val = $('.content').val();
+					var $content = $('<div class="text">' + val + '</div>');
+					//获取内容，创建新元素，并设置位置追加到目标元素中	
+					$screen = $(document.getElementById("screen"));
+					var top = Math.random() * $screen.height()+40;
+					$content.css({
+        				top: top | 0 + "px",
+       					left: 80
+      				})
+					  $('.content').val("");  
+      				;
+					
+					$('.dm_show').append($content);
+
+					//移动到最右侧，直接删除该元素
+					$content.animate({
+						left: $screen.width()+80-$content.width()
+					}, 8000, function() {
+						
+						$(this).remove();
+					});
+				});
+				$('.clear').click(function() {
+					$('.dm_show').empty();
+				});
+			});
+		</script>
+</body>
+</html>
